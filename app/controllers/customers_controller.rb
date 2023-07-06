@@ -9,14 +9,25 @@ class CustomersController < ApplicationController
     end
 
     def create 
+       
+    end
+
+    def update 
         room = Room.find(params[:room_id])
-        if room && !room.occupied
-            room.update(occupied: true)
-            customer = Customer.create(customer_params)
-            render json:customer, serializer: SingleCustomerSerializer, status: :created
+        customer = Customer.find_by(email: params[:email])
+        if room && (room.available > 0)
+            Room.decrement_counter(:available, params[:room_id], touch: true)
+            customer.update!(customer_params)
+            render json:customer, serializer: SingleCustomerSerializer, status: :ok
         else
-            render json: {error: "Room taken"}
+            render json: {error: "All rooms of this type are taken"}
         end
+    end
+
+    def destroy 
+        customer = Customer.find(params[:id])
+        customer.destroy 
+        render json: {success: "deleted"}
     end
 
     private 
@@ -25,6 +36,6 @@ class CustomersController < ApplicationController
     end
 
     def customer_params 
-        params.permit(:name, :room_id)
+        params.permit(:email, :room_id, :date_in, :date_out)
     end
 end
