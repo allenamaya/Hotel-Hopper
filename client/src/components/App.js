@@ -6,6 +6,9 @@ import { Customers } from './customers'
 import Navigation from './Navigation'
 import HotelContext from './HotelContext'
 import HotelView from './hotels/HotelView'
+import CustomerLogin from './customer-login/CustomerLogin'
+import AdminLogin from './admin-login/AdminLogin'
+import Logout from './logout/Logout'
 
 const App = () => {
 
@@ -16,17 +19,16 @@ const App = () => {
   const [dateIn, setDateIn] = useState(new Date())
   const [dateOut, setDateOut] = useState(new Date())
   const [defaultId, setDefaultId] = useState(1)
+  const [currentCustomer, setCurrentCustomer] = useState('');
+  const [currentAdmin, setCurrentAdmin] = useState('')
 
 
   
   return (
     <div>
-          
-          <Navigation />
-          
-          <div className='main-content'>
-            <HotelContext.Provider value={{ defaultId, setDefaultId, dateIn, setDateIn, dateOut, setDateOut, currentHotel, setCurrentHotel, currentRoom, setCurrentRoom, roomToBook, setRoomToBook, bookingDetails, setBookingDetails}}>   
-            
+            <HotelContext.Provider value={{ currentAdmin, setCurrentAdmin, currentCustomer, setCurrentCustomer, defaultId, setDefaultId, dateIn, setDateIn, dateOut, setDateOut, currentHotel, setCurrentHotel, currentRoom, setCurrentRoom, roomToBook, setRoomToBook, bookingDetails, setBookingDetails}}>   
+            <Navigation />
+            <div className='main-content'>
               <Routes>
                 <Route exact path='/showBookingDetails' element={<ShowBookingDetails />} />
                 <Route exact path='/bookRoom' element={<BookRoom />}/>
@@ -34,10 +36,14 @@ const App = () => {
                 <Route exact path="/hotels" element={<Hotels />}/>
                 <Route exact path= "/hotels/:id" element={<Rooms />}/>
                 <Route exact path="/myHotel" element={<HotelView />}/>
-                <Route exact path="/customers" element={<Customers/>} /> 
+                {currentAdmin ?<Route exact path="/customers" element={<Customers/>} />  : "/"} 
+                <Route exact path="/customer-login" element={<CustomerLogin />} />
+                <Route exact path="/admin-login" element={<AdminLogin />}/>
+                <Route exact path="/logout" element={<Logout />} />
               </Routes>
+            </div>
           </HotelContext.Provider>
-          </div>
+         
         
       
     </div>
