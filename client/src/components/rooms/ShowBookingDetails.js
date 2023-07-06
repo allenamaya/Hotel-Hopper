@@ -4,9 +4,9 @@ import { Form, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
 const ShowBookingDetails = () => {
-    const {bookingDetails, dateIn, dateOut} = useContext(HotelContext)
+    const {currentCustomer, dateIn, dateOut} = useContext(HotelContext)
     let dateDiff = (dateOut.getTime() - dateIn.getTime()) / (1000 * 60 * 60 * 24)
-    let price = dateDiff * 30
+    let price = Math.round(dateDiff * 30)
     const navigate = useNavigate()
 
     console.log(dateDiff);
@@ -18,9 +18,9 @@ const ShowBookingDetails = () => {
     <div className='details-form-container'>
         <Form className='details-form'>
           <Form.Label ><h3>Booking Details</h3></Form.Label>
-            <Form.Label ><h4 className='row'><div className='col'>Customer name: </div> <div className='col'>{bookingDetails.name}</div></h4></Form.Label>
-          <Form.Label ><h4 className='row'><div className='col'>Room number: </div> <div className='col'>{bookingDetails.room.id}</div></h4></Form.Label>
-          <Form.Label ><h4 className='row'><div className='col'>Room type: </div> <div className='col'>{bookingDetails.room.room_type}</div></h4></Form.Label>
+            <Form.Label ><h4 className='row'><div className='col'>Customer name: </div> <div className='col'>{currentCustomer.name}</div></h4></Form.Label>
+          <Form.Label ><h4 className='row'><div className='col'>Room number: </div> <div className='col'>{currentCustomer.room.id}</div></h4></Form.Label>
+          <Form.Label ><h4 className='row'><div className='col'>Room type: </div> <div className='col'>{currentCustomer.room.room_type}</div></h4></Form.Label>
           <Form.Label ><h4 className='row'><div className='col'>Date In: </div> <div className='col'>{dateIn.toLocaleDateString()}</div></h4></Form.Label>
 
           <Form.Label ><h4 className='row'><div className='col'>Date out: </div> <div className='col'>{dateOut.toLocaleDateString()}</div></h4></Form.Label>

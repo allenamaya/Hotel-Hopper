@@ -7,7 +7,7 @@ import Calendar from 'react-calendar';
 
 
 const BookRoom = () => {
-    const {roomToBook, setBookingDetails, dateIn, setDateIn, dateOut, setDateOut} = useContext(HotelContext)
+    const {roomToBook, dateIn, setDateIn, dateOut, setDateOut, currentCustomer, setCurrentCustomer} = useContext(HotelContext)
     const navigate = useNavigate()
     let dateDiff = (dateOut.getTime() - dateIn.getTime()) / (1000 * 60 * 60 * 24)
     let price = Math.round((dateDiff * 30))
@@ -15,7 +15,7 @@ const BookRoom = () => {
     console.log(dateIn);
 
     const[formData, setFormData] = useState({
-        name: "Enter customer name",
+        email: currentCustomer.email,
         room_id: roomToBook.id
     })
 
@@ -24,26 +24,35 @@ const BookRoom = () => {
     }
 
     function bookRoom(){
-        fetch("/customers",{
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({...formData,
-                date_in: dateIn.toLocaleDateString(),
-                date_out: dateOut.toLocaleDateString(),
+        if(currentCustomer){
+            fetch(`/customers/${currentCustomer.id}`,{
+                method: "PATCH",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({...formData,
+                    date_in: dateIn.toLocaleDateString(),
+                    date_out: dateOut.toLocaleDateString(),
+                })
             })
-        })
-        .then(res => res.json())
-        .then(data => {
-            setBookingDetails(data)
-            console.log(data)
-            navigate("/showBookingDetails")
-        })
+            .then(res => {
+                if(res.ok){
+                    res.json().then(user => setCurrentCustomer(user))
+                    navigate("/showBookingDetails")
+                }
+                else{
+                    console.log(res.json())
+                    navigate("/")
+                }
+            })
+        }else{
+            navigate("/customer-login")
+        }
+        
     }
 
     function goBack(){
         navigate(-1)
     }
-
+    console.log(roomToBook)
     return (
         <div className='book-container'>
             
@@ -53,10 +62,10 @@ const BookRoom = () => {
                 </Form.Group>
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">
-                     Customer name
+                     Email:
                     </Form.Label>
                     <Col sm="10">
-                    <Form.Control plaintext name="name"  placeholder={formData.name} onChange={handleChange}/>
+                    <Form.Control type='email' name="email"  placeholder={formData.email} onChange={handleChange}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="mb-3">
@@ -97,7 +106,7 @@ const BookRoom = () => {
                         Room Number
                     </Form.Label>
                     <Col sm="10">
-                    <Form.Control type="number"  readOnly defaultValue={roomToBook.id} />
+                    <Form.Control type="number"  readOnly placeholder={roomToBook.id} />
                     </Col>
                     <Form.Label column sm="2">
                         Amount to be paid: 
