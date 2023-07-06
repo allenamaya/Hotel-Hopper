@@ -1,0 +1,155 @@
+body{
+    background-color: bisque;
+    color: black;
+    padding: 0;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    margin:auto;
+}
+
+.hotel-card:hover{
+    background-color: antiquewhite;
+
+}
+
+.hotel-rooms-display{
+    text-align: center;
+}
+
+.room:hover, .hotel:hover{
+    background-color: bisque;
+    color: rgb(16, 21, 25);
+}
+
+.book-button{
+    text-align: center;
+    padding-top: 20px;
+}
+.home-page{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+.landing-page{
+   text-align: center;
+   color: aliceblue;
+   margin-top: 50px;
+   margin-bottom: 30px;
+   padding-top: 250px;
+   padding-bottom: 250px;
+   background-image: url(https://images.alphacoders.com/439/439191.jpg);
+   background-size:cover;
+   background-repeat: no-repeat;
+}
+.room, .hotel{
+    max-width: 450px;
+    margin: 20px;
+}
+.book-container{
+    margin-top: 150px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.book-container > form{
+    
+    background-color: bisque;
+    color: black;
+    margin-top:100px;
+    border-radius: 20px;
+    border: solid;
+    padding-bottom: 30px;
+    padding-top: 100px;
+    margin: auto;
+    width: 50%;
+    font-size: 18px;
+}
+.main-content{
+    height: 100%;
+    margin-left: 250px;
+}
+.details-form-container{
+    margin-top: 150px;
+    text-align: center;
+}
+.details-form{
+    
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    border: solid;
+    width: 50%;
+    margin: auto;
+    border-radius: 15px;
+    padding-bottom: 70px;
+}
+.details-form > *{
+    padding: 10px;
+}
+.details-form > button{
+    width: fit-content;
+    margin: auto;
+}
+.row{
+  width: 80%;
+  margin: auto;
+
+}
+
+.amenities-at-home{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+.amenities-at-home > *{
+    margin: auto;
+    margin-top: 40px;
+}
+li{
+    list-style: none;
+    font-size: 18px;
+    margin-left: 0px;
+    padding-left: 0%;
+}
+.prop-highlights{
+    margin-top: 30px;
+}
+.button-group{
+    text-align: center;
+    margin: auto;
+}
+.button-group > *{
+    margin-right: 15px;
+}
+.checkout:hover{
+    background-color: red;
+}
+.my-navigation{
+    width: 250px;
+    height: 100%;
+    background-color: bisque;
+    position: fixed;
+    margin-top: 0;
+    padding-top: 50px;
+    top:0%;
+    display: flex;
+    flex-direction: column;
+}
+a{
+    text-decoration: none;
+}
+.my-navigation > *{
+    font-size: 18px;
+    font: bold;
+    margin-left: 15px;
+}
+
