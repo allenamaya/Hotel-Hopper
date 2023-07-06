@@ -39,7 +39,7 @@ body{
 .landing-page{
    text-align: center;
    color: aliceblue;
-   margin-top: 50px;
+   margin-top: 0px;
    margin-bottom: 30px;
    padding-top: 250px;
    padding-bottom: 250px;
@@ -52,7 +52,7 @@ body{
     margin: 20px;
 }
 .book-container{
-    margin-top: 150px;
+    margin-top: 10px;
     text-align: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -72,7 +72,7 @@ body{
 }
 .main-content{
     height: 100%;
-    margin-left: 250px;
+    margin-left: 200px;
 }
 .details-form-container{
     margin-top: 150px;
@@ -134,22 +134,34 @@ li{
     background-color: red;
 }
 .my-navigation{
-    width: 250px;
+    width: 200px;
     height: 100%;
     background-color: bisque;
     position: fixed;
     margin-top: 0;
-    padding-top: 50px;
+    padding-top: 30px;
     top:0%;
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 a{
     text-decoration: none;
+    color: black;
 }
 .my-navigation > *{
     font-size: 18px;
     font: bold;
-    margin-left: 15px;
+    margin: 20px
+
+}
+.login-form{
+    width: 50%;
+    margin: auto;
+    margin-top: 100px;
+    border: solid;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
 }
 
