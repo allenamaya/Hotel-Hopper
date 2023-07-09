@@ -24,7 +24,8 @@ The Hotel Hopper is a web-based platform built on Rails that simplifies the sear
 4. Set up the database: `rails db:setup`
 5. Start the server: `rails server`
 6. Visit `http://localhost:3000` in your browser to access the application.
-
+## Live link
+https://hotel-hoper.onrender.com/
 ## Requirements
 
 - Ruby version: 2.7.4
